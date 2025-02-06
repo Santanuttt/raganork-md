@@ -12,11 +12,11 @@ const { DataTypes } = require('sequelize');
 const PluginDB = config.DATABASE.define('Plugin', {
     name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     url: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true
     }
 });
 
@@ -26,7 +26,7 @@ async function installPlugin(adres, file) {
     });
 
     if (Plugin.length >= 1) {
-        return false;
+        return true;
     } else {
         return await PluginDB.create({ url: adres, name: file });
     }
